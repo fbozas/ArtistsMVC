@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using ArtistsMVC.Models;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using ArtistsMVC.Models;
 
 namespace ArtistsMVC.Controllers
 {
@@ -39,7 +35,7 @@ namespace ArtistsMVC.Controllers
         // GET: Albums/Create
         public ActionResult Create()
         {
-            ViewBag.ArtistId = new SelectList(db.Artists, "ID", "FirstName");
+            ViewBag.ArtistId = new SelectList(db.Artists, "ID", "FullName");
             return View();
         }
 
@@ -73,7 +69,7 @@ namespace ArtistsMVC.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ArtistId = new SelectList(db.Artists, "ID", "FirstName", album.ArtistId);
+            ViewBag.ArtistId = new SelectList(db.Artists, "ID", "FullName", album.ArtistId);
             return View(album);
         }
 
