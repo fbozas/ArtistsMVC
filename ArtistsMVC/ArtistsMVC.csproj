@@ -261,6 +261,7 @@
     <Content Include="Views\Albums\Edit.cshtml" />
     <Content Include="Views\Albums\Index.cshtml" />
     <Content Include="Views\Songs\Index.cshtml" />
+    <Content Include="Views\Songs\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
