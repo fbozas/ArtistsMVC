@@ -1,4 +1,6 @@
 ﻿using ArtistsMVC.Models;
+using System.Data.Entity;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace ArtistsMVC.Controllers
@@ -13,7 +15,12 @@ namespace ArtistsMVC.Controllers
         // GET: Songs
         public ActionResult Index()
         {
-            return View();
+            var songs = _context
+                .Songs
+                .Include(s => s.Album.Artist)
+                .ToList();
+
+            return View(songs);
         }
 
         protected override void Dispose(bool disposing)
