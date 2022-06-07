@@ -178,6 +178,10 @@
     <Compile Include="Migrations\202206061808224_Initial.Designer.cs">
       <DependentUpon>202206061808224_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202206071600530_UpdateAlbumsDescriptions.cs" />
+    <Compile Include="Migrations\202206071600530_UpdateAlbumsDescriptions.Designer.cs">
+      <DependentUpon>202206071600530_UpdateAlbumsDescriptions.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Album.cs" />
@@ -270,6 +274,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202206061808224_Initial.resx">
       <DependentUpon>202206061808224_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202206071600530_UpdateAlbumsDescriptions.resx">
+      <DependentUpon>202206071600530_UpdateAlbumsDescriptions.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
