@@ -183,6 +183,10 @@
     <Compile Include="Migrations\202206071600530_UpdateAlbumsDescriptions.Designer.cs">
       <DependentUpon>202206071600530_UpdateAlbumsDescriptions.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202206071657584_AddYoutubeUrl.cs" />
+    <Compile Include="Migrations\202206071657584_AddYoutubeUrl.Designer.cs">
+      <DependentUpon>202206071657584_AddYoutubeUrl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Album.cs" />
@@ -203,6 +207,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="img\youtube.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
@@ -279,6 +284,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202206071600530_UpdateAlbumsDescriptions.resx">
       <DependentUpon>202206071600530_UpdateAlbumsDescriptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202206071657584_AddYoutubeUrl.resx">
+      <DependentUpon>202206071657584_AddYoutubeUrl.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
