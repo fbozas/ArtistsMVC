@@ -1,0 +1,33 @@
+﻿@model ArtistsMVC.ViewModels.SongFormViewModel
+@{
+    ViewBag.Title = "SongForm";
+}
+
+<h2>Song Save</h2>
+
+@using (Html.BeginForm("Save", "Songs"))
+{   
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Song.Title)
+        @Html.TextBoxFor(model => model.Song.Title, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Song.Title)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Song.Youtube)
+        @Html.TextBoxFor(model => model.Song.Youtube, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Song.Youtube)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Song.AlbumId)
+        @Html.DropDownListFor(model => model.Song.AlbumId, new SelectList(Model.Albums, "ID", "Title"), "Select Album", new { @class = "form-control" })
+
+        @Html.ValidationMessageFor(model => model.Song.AlbumId)
+    </div>
+
+    <button type="submit" class="btn btn-default">Save</button>
+
+}

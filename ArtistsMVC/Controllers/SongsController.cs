@@ -60,6 +60,28 @@ namespace ArtistsMVC.Controllers
             return View("SongForm", viewmodel);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Save(Song song)
+        {
+            song.Youtube = $"https://www.youtube.com/embed/{song.Youtube}";
+            _context.Songs.Add(song);
+
+            if (!ModelState.IsValid)
+            {
+                var viewModel = new SongFormViewModel()
+                {
+                    Song = song,
+                    Albums = _context.Albums.ToList()
+                };
+
+                return View("SongForm", viewModel);
+            }
+
+            _context.SaveChanges();
+            return RedirectToAction("Index", "Songs");
+        }
+
         protected override void Dispose(bool disposing)
         {
             _context.Dispose();
