@@ -57,7 +57,7 @@ namespace ArtistsMVC.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ArtistId = new SelectList(db.Artists, "ID", "FirstName", album.ArtistId);
+            ViewBag.ArtistId = new SelectList(db.Artists, "ID", "FullName", album.ArtistId);
             return View(album);
         }
 
@@ -121,7 +121,7 @@ namespace ArtistsMVC.Controllers
         }
 
         protected override void Dispose(bool disposing)
-        {
+        {          
             if (disposing)
             {
                 db.Dispose();
