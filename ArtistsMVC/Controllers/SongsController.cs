@@ -65,7 +65,18 @@ namespace ArtistsMVC.Controllers
         public ActionResult Save(Song song)
         {
             song.Youtube = $"https://www.youtube.com/embed/{song.Youtube}";
-            _context.Songs.Add(song);
+
+            if(song.ID == 0)
+            {
+                _context.Songs.Add(song);
+            }
+            else
+            {
+                var songInDb = _context.Songs.SingleOrDefault(s => s.ID == song.ID);
+                songInDb.Title = song.Title;
+                songInDb.Youtube = song.Youtube;
+                songInDb.AlbumId = song.AlbumId;
+            }
 
             if (!ModelState.IsValid)
             {
