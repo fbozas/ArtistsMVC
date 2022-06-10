@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace ArtistsMVC.Repositories
 {
-    public class AlbumRepository
+    public class AlbumRepository : IDisposable
     {
         private readonly ApplicationDbContext _context;
 
@@ -66,6 +66,11 @@ namespace ArtistsMVC.Repositories
             Album album = GetById(id);
             _context.Albums.Remove(album);
             _context.SaveChanges();
+        }
+
+        public void Dispose()
+        {
+            _context.Dispose();
         }
     }
 }

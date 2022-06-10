@@ -9,7 +9,6 @@ namespace ArtistsMVC.Controllers
 {
     public class AlbumsController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
 
         private readonly AlbumRepository _albumRepository;
         private readonly ArtistsRepository _artistsRepository;
@@ -131,10 +130,11 @@ namespace ArtistsMVC.Controllers
         }
 
         protected override void Dispose(bool disposing)
-        {          
+        {
             if (disposing)
             {
-                db.Dispose();
+                _artistsRepository.Dispose();
+                _albumRepository.Dispose();
             }
             base.Dispose(disposing);
         }
