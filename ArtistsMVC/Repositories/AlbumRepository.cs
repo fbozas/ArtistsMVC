@@ -26,8 +26,13 @@ namespace ArtistsMVC.Repositories
                 .Include(a => a.Artist);
         }
 
-        public Album GetById(int id)
+        public Album GetById(int? id)
         {
+            if (id == null)
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+
             return _context.Albums
                 .SingleOrDefault(a => a.ID == id);
         }
@@ -47,6 +52,12 @@ namespace ArtistsMVC.Repositories
         public void Create(Album album)
         {
             _context.Albums.Add(album);
+            _context.SaveChanges();
+        }
+
+        public void Update(Album album)
+        {
+            _context.Entry(album).State = EntityState.Modified;
             _context.SaveChanges();
         }
     }
