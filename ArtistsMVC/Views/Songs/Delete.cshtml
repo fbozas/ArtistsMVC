@@ -31,10 +31,8 @@
     @Html.DisplayFor(model => model.Youtube)
 </p>
 
-@using (Html.BeginForm("DeleteConfirmed", "Songs", FormMethod.Post))
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    @*<input type="hidden" value="@Html.DisplayFor(model => model.ID)" name="id"/>*@
-    @Html.HiddenFor(model => model.ID)
     <button type="submit" class="btn btn-default">Delete</button>
 }

@@ -143,7 +143,8 @@ namespace ArtistsMVC.Controllers
             return View(song);
         }
 
-        [HttpPost]
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             var song = _context.Songs
