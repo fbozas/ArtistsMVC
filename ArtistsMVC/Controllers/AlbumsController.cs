@@ -101,7 +101,11 @@ namespace ArtistsMVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Album album = db.Albums.Find(id);
+
+            Album album = db.Albums
+                .Include(a => a.Artist)
+                .SingleOrDefault(a => a.ID == id);
+
             if (album == null)
             {
                 return HttpNotFound();
