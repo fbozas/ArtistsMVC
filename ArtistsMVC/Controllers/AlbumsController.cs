@@ -1,7 +1,6 @@
 ﻿using ArtistsMVC.Models;
 using ArtistsMVC.Repositories;
 using System;
-using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -113,9 +112,7 @@ namespace ArtistsMVC.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Album album = db.Albums
-                .Include(a => a.Artist)
-                .SingleOrDefault(a => a.ID == id);
+            Album album = _albumRepository.GetByIdWithArtist(id);
 
             if (album == null)
             {
@@ -129,9 +126,7 @@ namespace ArtistsMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Album album = db.Albums.Find(id);
-            db.Albums.Remove(album);
-            db.SaveChanges();
+            _albumRepository.Delete(id);
             return RedirectToAction("Index");
         }
 

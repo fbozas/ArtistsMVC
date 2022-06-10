@@ -60,5 +60,12 @@ namespace ArtistsMVC.Repositories
             _context.Entry(album).State = EntityState.Modified;
             _context.SaveChanges();
         }
+
+        public void Delete(int? id)
+        {
+            Album album = GetById(id);
+            _context.Albums.Remove(album);
+            _context.SaveChanges();
+        }
     }
 }
