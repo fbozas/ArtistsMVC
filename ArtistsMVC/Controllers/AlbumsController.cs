@@ -1,5 +1,6 @@
 ﻿using ArtistsMVC.Models;
 using ArtistsMVC.Repositories;
+using System;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -28,20 +29,22 @@ namespace ArtistsMVC.Controllers
         // GET: Albums/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+
+            try
+            {
+                Album album = _albumRepository.GetByIdWithArtist(id);
+                if (album == null)
+                {
+                    return HttpNotFound();
+                }
+
+                return View(album);
+            }
+            catch(Exception ex)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Album album = db.Albums
-                .Include(a => a.Artist)
-                .SingleOrDefault(a => a.ID == id);
-
-            if (album == null)
-            {
-                return HttpNotFound();
-            }
-            return View(album);
         }
 
         // GET: Albums/Create
