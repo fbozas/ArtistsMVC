@@ -13,10 +13,12 @@ namespace ArtistsMVC.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         private readonly AlbumRepository _albumRepository;
+        private readonly ArtistsRepository _artistsRepository;
 
         public AlbumsController()
         {
             _albumRepository = new AlbumRepository();
+            _artistsRepository = new ArtistsRepository();
         }
 
         // GET: Albums
@@ -50,7 +52,7 @@ namespace ArtistsMVC.Controllers
         // GET: Albums/Create
         public ActionResult Create()
         {
-            ViewBag.ArtistId = new SelectList(db.Artists, "ID", "FullName");
+            ViewBag.ArtistId = new SelectList(_artistsRepository.GetAll(), "ID", "FullName");
             return View();
         }
 
@@ -63,12 +65,11 @@ namespace ArtistsMVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Albums.Add(album);
-                db.SaveChanges();
+                _albumRepository.Create(album);
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ArtistId = new SelectList(db.Artists, "ID", "FullName", album.ArtistId);
+            ViewBag.ArtistId = new SelectList(_artistsRepository.GetAll(), "ID", "FullName", album.ArtistId);
             return View(album);
         }
 
