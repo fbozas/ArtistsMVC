@@ -1,4 +1,5 @@
-﻿using ArtistsMVC.Models;
+﻿using ArtistsMVC.Dtos;
+using ArtistsMVC.Models;
 using ArtistsMVC.Repositories;
 using System;
 using System.Collections.Generic;
@@ -19,33 +20,64 @@ namespace ArtistsMVC.Controllers.Api
         }
         
         
-        public IEnumerable<Album> GetAlbums()
+        public IEnumerable<AlbumDto> GetAlbums()
         {
-            return _albumRepository.GetAll();
+            var albums = _albumRepository.GetAll();
+            var albumDtos = new List<AlbumDto>();
+
+            foreach(var album in albums)
+            {
+                var albumDto = new AlbumDto()
+                {
+                    ID = album.ID,
+                    Title = album.Title,
+                    Description = album.Description,
+                    ArtistId = album.ArtistId
+                };
+
+                albumDtos.Add(albumDto);
+            }
+
+            return albumDtos;
         }
 
-        public Album GetAlbum(int id)
+        public AlbumDto GetAlbum(int id)
         {
             var album = _albumRepository.GetById(id);
 
             if (album == null)
                 throw new HttpResponseException(HttpStatusCode.NotFound);
 
-            return album;
+            var albumDto = new AlbumDto()
+            {
+                ID = album.ID,
+                Title = album.Title,
+                Description = album.Description,
+                ArtistId = album.ArtistId
+            };
+
+            return albumDto;
         }
 
         [HttpPost]
-        public Album CreateAlbum(Album album)
+        public Album CreateAlbum(AlbumDto albumDto)
         {
             if (!ModelState.IsValid)
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
+
+            var album = new Album()
+            {
+                Title = albumDto.Title,
+                Description = albumDto.Description,
+                ArtistId = albumDto.ArtistId
+            };
 
             _albumRepository.Create(album);
             return album;
         }
 
         [HttpPut]
-        public void Update(int id, Album album)
+        public void Update(int id, AlbumDto albumDto)
         {
             if (!ModelState.IsValid)
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
@@ -57,9 +89,9 @@ namespace ArtistsMVC.Controllers.Api
             }
 
             //_albumRepository.Update(album); // throws an exception
-            albumInDb.Title = album.Title;
-            albumInDb.Description = album.Description;
-            albumInDb.ArtistId = album.ArtistId;
+            albumInDb.Title = albumDto.Title;
+            albumInDb.Description = albumDto.Description;
+            albumInDb.ArtistId = albumDto.ArtistId;
             _albumRepository.Save();
         }
 
