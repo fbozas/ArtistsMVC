@@ -21,57 +21,59 @@ namespace ArtistsMVC.Controllers.Api
         }
         
         
-        public IEnumerable<AlbumDto> GetAlbums()
+        public IHttpActionResult GetAlbums()
         {
-            return _albumRepository.GetAll()
-                .Select(Mapper.Map<Album, AlbumDto>);
+            return Ok(_albumRepository.GetAll()
+                .Select(Mapper.Map<Album, AlbumDto>));
         }
 
-        public AlbumDto GetAlbum(int id)
+        public IHttpActionResult GetAlbum(int id)
         {
             var album = _albumRepository.GetById(id);
 
             if (album == null)
-                throw new HttpResponseException(HttpStatusCode.NotFound);
+                return NotFound();
 
-            return Mapper.Map<Album, AlbumDto>(album);
+            return Ok(Mapper.Map<Album, AlbumDto>(album));
         }
 
         [HttpPost]
-        public AlbumDto CreateAlbum(AlbumDto albumDto)
+        public IHttpActionResult CreateAlbum(AlbumDto albumDto)
         {
             if (!ModelState.IsValid)
-                throw new HttpResponseException(HttpStatusCode.BadRequest);
+                return BadRequest();
 
             var album = Mapper.Map<AlbumDto, Album>(albumDto);
             _albumRepository.Create(album);
             albumDto.ID = album.ID;
-            return albumDto;
+            return Created(new Uri(Request.RequestUri + "/" + album.ID), albumDto);
         }
 
         [HttpPut]
-        public void Update(int id, AlbumDto albumDto)
+        public IHttpActionResult Update(int id, AlbumDto albumDto)
         {
             if (!ModelState.IsValid)
-                throw new HttpResponseException(HttpStatusCode.BadRequest);
+                return BadRequest();
 
             var albumInDb = _albumRepository.GetById(id);
-            if(albumInDb == null)
-            {
-                throw new HttpResponseException(HttpStatusCode.NotFound);
-            }
+            if (albumInDb == null)
+                return NotFound();
 
             Mapper.Map(albumDto, albumInDb); // Here you should pass the id from body
             _albumRepository.Save();
+
+            return StatusCode(HttpStatusCode.NoContent);
         }
 
         [HttpDelete]
-        public void DeleteAlbum(int id)
+        public IHttpActionResult DeleteAlbum(int id)
         {
             var albumInDb = _albumRepository.GetById(id);
             if (albumInDb == null)
-                throw new HttpResponseException(HttpStatusCode.NotFound);
+                return NotFound();
             _albumRepository.Delete(id);
+
+            return Ok(albumInDb);
         }
 
         protected override void Dispose(bool disposing)
