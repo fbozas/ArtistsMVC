@@ -20,11 +20,14 @@ namespace ArtistsMVC
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
-                      "~/Scripts/bootbox.js"));
+                      "~/Scripts/bootbox.js",
+                      "~/Scripts/Datatables/jquery.dataTables.js",
+                      "~/Scripts/Datatables/dataTables.bootstrap.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap-simplex.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                      "~/Content/Datatables/css/dataTables.bootstrap.css"));
         }
     }
 }
