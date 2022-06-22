@@ -184,10 +184,12 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AlbumsController.cs" />
     <Compile Include="Controllers\Api\AlbumsController.cs" />
+    <Compile Include="Controllers\Api\MessagesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SongsController.cs" />
     <Compile Include="Dtos\AlbumDto.cs" />
+    <Compile Include="Dtos\MessageDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -203,6 +205,10 @@
     <Compile Include="Migrations\202206071657584_AddYoutubeUrl.Designer.cs">
       <DependentUpon>202206071657584_AddYoutubeUrl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202206221526512_AddMessageModel.cs" />
+    <Compile Include="Migrations\202206221526512_AddMessageModel.Designer.cs">
+      <DependentUpon>202206221526512_AddMessageModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Album.cs" />
@@ -214,6 +220,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AlbumRepository.cs" />
     <Compile Include="Repositories\ArtistsRepository.cs" />
+    <Compile Include="Repositories\MessageRepository.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\SongFormViewModel.cs" />
   </ItemGroup>
@@ -310,6 +317,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202206071657584_AddYoutubeUrl.resx">
       <DependentUpon>202206071657584_AddYoutubeUrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202206221526512_AddMessageModel.resx">
+      <DependentUpon>202206221526512_AddMessageModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

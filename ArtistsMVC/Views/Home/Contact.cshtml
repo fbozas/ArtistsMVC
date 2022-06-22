@@ -1,17 +1,67 @@
-﻿@{
+﻿@model ArtistsMVC.Dtos.MessageDto
+@{
     ViewBag.Title = "Contact";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+<div class="row">
+    @section FullWidth{
+        <div id="google-map">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12579.398108262125!2d23.7323267!3d37.9806408!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xae9a4f85e0cc2020!2sPeopleCert%20Education!5e0!3m2!1sel!2sgr!4v1655912290361!5m2!1sel!2sgr" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+    }
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+    <div class="col-md-6">
+        <h2>Στοιχεία Επικοινωνίας</h2>
+        <ul class="list-unstyled">
+            <li>Πανεπιστημίου 39 Στοά Πεσμαζόγλου 1ος όροφος, Αθήνα 105 64</li>
+            <li>2103729070</li>
+            <li>hello@peoplecert.org</li>
+        </ul>
+    </div>
+    <div class="col-md-6">
+        <h2>Φόρμα Επικοινωνίας</h2>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Sender, new { @class = "col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Sender, new { htmlAttributes = new { @class = "form-control", @id = "contactName" } })
+                    @Html.ValidationMessageFor(model => model.Sender, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Email, new { @class = "col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @id = "contactEmail" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Mobile, new { @class = "col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Mobile, new { htmlAttributes = new { @class = "form-control", @id = "contactPhone" } })
+                    @Html.ValidationMessageFor(model => model.Mobile, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Content, new { @class = "col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextArea("Content", new { rows = 10, columns =40, @class ="form-control", @id= "message"})
+                    @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <button type="submit" class="btn btn-default">Send</button>
+                </div>
+            </div>
+        }
+    </div>
+</div>

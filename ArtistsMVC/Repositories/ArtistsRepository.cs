@@ -13,11 +13,11 @@ namespace ArtistsMVC.Repositories
             _context = new ApplicationDbContext();
         }
 
-
         public IEnumerable<Artist> GetAll()
         {
             return _context.Artists;
         }
+
         public void Dispose()
         {
             _context.Dispose();
