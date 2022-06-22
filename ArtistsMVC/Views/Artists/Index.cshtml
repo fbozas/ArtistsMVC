@@ -9,24 +9,20 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.FullName)
-        </th>
-        <th>Actions</th>
-    </tr>
+<table class="table" id="artists">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FullName)
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
 
 @foreach (var item in Model) {
-    <tr>
-        <td>
-            <a href="/artists/edit/@item.ID">@item.FullName</a>
-        </td>
-        <td>
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            <button class="btn-link js-delete" data-artist-id="@item.ID">Delete</button>
-        </td>
-    </tr>
+    <tbody>        
+        
+    </tbody>
 }
 
 </table>
@@ -36,6 +32,29 @@
     
     <script>
         $(document).ready(function () {
+            //$("#artists").DataTable();
+
+            var table = $("#artists").DataTable({
+                ajax: {
+                    url: "/api/artists",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "fullName",
+                        render: function (data, type, artist) {
+                            return "<a href = '/artists/edit/" + artist.id + "'>" + artist.fullName + "</a>";
+                        }
+                    },
+                    {
+                        data: "id",
+                        render: function (data, type, artist) {
+                            console.log(data);
+                            return "<a href='/artists/details/" + artist.id + "'> Details </a> | <button class= 'btn-link js-delete' data-artist-id=" + artist.id + ">Delete</button>";
+                        }
+                    }
+                ]
+            })
 
             $(".js-delete").click(function () {
                 var button = $(this);
