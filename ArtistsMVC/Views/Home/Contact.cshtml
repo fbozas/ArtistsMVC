@@ -65,3 +65,33 @@
         }
     </div>
 </div>
+
+@section Scripts{
+    
+    <script>
+        $(document).ready(function () {
+            $("form").submit(function (e) {
+                e.preventDefault();
+
+                $("form").css('opacity', '0.3');
+
+                $.ajax({
+                    url: "/api/messages",
+                    method: "POST",
+                    data: {
+                        Sender: $("#contactName").val(),
+                        Email: $("#contactEmail").val(),
+                        Mobile: $("#contactPhone").val(),
+                        Content: $("#message").val(),
+                        IsRead: false
+                    }
+
+                }).done(function (response) {
+                    console.log(response);
+                }).fail(function (error) {
+                    console.log(error);
+                });
+            });
+        });
+    </script>    
+}

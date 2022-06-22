@@ -45,6 +45,9 @@ namespace ArtistsMVC.Controllers.Api
 
             var message = Mapper.Map<MessageDto, Message>(messageDto);
             _messageRepository.Create(message);
+
+            messageDto.ID = message.ID;
+            messageDto.Date = message.Date;
             // to do
             return Created(new Uri($"{Request.RequestUri}/{message.ID}"), messageDto);
         }
