@@ -11,12 +11,12 @@ namespace ArtistsMVC.Controllers
     {
 
         private readonly AlbumRepository _albumRepository;
-        private readonly ArtistsRepository _artistsRepository;
+        private readonly ArtistRepository _artistsRepository;
 
         public AlbumsController()
         {
             _albumRepository = new AlbumRepository();
-            _artistsRepository = new ArtistsRepository();
+            _artistsRepository = new ArtistRepository();
         }
 
         // GET: Albums

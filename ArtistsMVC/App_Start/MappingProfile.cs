@@ -17,6 +17,9 @@ namespace ArtistsMVC.App_Start
 
             Mapper.CreateMap<Message, MessageDto>();
             Mapper.CreateMap<MessageDto, Message>();
+
+            Mapper.CreateMap<Artist, ArtistDto>();
+            Mapper.CreateMap<ArtistDto, Artist>();
         }
     }
 }
