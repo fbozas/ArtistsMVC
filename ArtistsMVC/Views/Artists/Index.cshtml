@@ -48,17 +48,21 @@
                 var button = $(this);
                 console.log(button);
 
-                if (confirm("Are you sure to delete this artist?")) {
-                    $.ajax({
-                        url: "/api/artists/" + button.attr("data-artist-id"),
-                        method: "DELETE"
-                    }).done(function (response) {
-                        console.log(response);
-                        button.parents("tr").fadeOut();
-                    }).fail(function (error) {
-                        console.log(error);
-                    });
-                }
+                bootbox.confirm("Are you sure to delete this artist?", function (result) {
+                   
+                    if (result) {
+                        $.ajax({
+                            url: "/api/artists/" + button.attr("data-artist-id"),
+                            method: "DELETE"
+                        }).done(function (response) {
+                            console.log(response);
+                            button.parents("tr").fadeOut();
+                        }).fail(function (error) {
+                            console.log(error);
+                        });
+                    }
+                    
+                });
             });
         });
     </script>
