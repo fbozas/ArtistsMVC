@@ -73,6 +73,14 @@ namespace ArtistsMVC.Repositories
             _context.SaveChanges();
         }
 
+        public IEnumerable<Album> GetFirstFour()
+        {
+            var albums = _context.Albums;
+            var firstFour = albums.Take(4);
+
+            return firstFour;
+        }
+
         public void Dispose()
         {
             _context.Dispose();

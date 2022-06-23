@@ -216,6 +216,10 @@
     <Compile Include="Migrations\202206231636133_AddImageToArtist.Designer.cs">
       <DependentUpon>202206231636133_AddImageToArtist.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202206231653234_SeedTheThumbnailOfTheArtists.cs" />
+    <Compile Include="Migrations\202206231653234_SeedTheThumbnailOfTheArtists.Designer.cs">
+      <DependentUpon>202206231653234_SeedTheThumbnailOfTheArtists.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Album.cs" />
@@ -229,6 +233,7 @@
     <Compile Include="Repositories\ArtistRepository.cs" />
     <Compile Include="Repositories\MessageRepository.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\SongFormViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -349,6 +354,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="img\music.png" />
+    <Content Include="img\na_image.jpg" />
     <Content Include="img\success.svg" />
     <Content Include="img\youtube.png" />
     <Content Include="Scripts\bootbox.js" />
@@ -512,6 +518,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202206231636133_AddImageToArtist.resx">
       <DependentUpon>202206231636133_AddImageToArtist.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202206231653234_SeedTheThumbnailOfTheArtists.resx">
+      <DependentUpon>202206231653234_SeedTheThumbnailOfTheArtists.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

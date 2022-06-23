@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ArtistsMVC.Repositories;
+using ArtistsMVC.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,9 +10,23 @@ namespace ArtistsMVC.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly AlbumRepository _albumRepository;
+        private readonly ArtistRepository _artistRepository;
+
+        public HomeController()
+        {
+            _albumRepository = new AlbumRepository();
+            _artistRepository = new ArtistRepository();
+        }
         public ActionResult Index()
         {
-            return View();
+            HomeViewModel viewModel = new HomeViewModel()
+            {
+                Artists = _artistRepository.GetFirstFour(),
+                Albums = _albumRepository.GetFirstFour()
+            };
+
+            return View(viewModel);
         }
 
         public ActionResult About()

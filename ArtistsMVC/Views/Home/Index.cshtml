@@ -1,4 +1,6 @@
-﻿@{
+﻿@model ArtistsMVC.ViewModels.HomeViewModel
+
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -7,3 +9,17 @@
     <img src="~/img/music.png" id="image-hero" />
     
 }
+
+<div class="row">
+    <h2 class="text-center">Artists</h2>
+    <hr />
+    @foreach(var artist in Model.Artists)
+    {
+        <div class="col-md-3">
+            <img src="~/img/@Url.Content(artist.Thumbnail)" class="music-thumb" />
+            <div class="title">
+                <h4 class="text-center">@artist.FullName</h4>
+            </div>
+        </div>
+    }
+</div>

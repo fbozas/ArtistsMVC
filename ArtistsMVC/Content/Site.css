@@ -33,3 +33,12 @@ img#image-hero {
     height: 400px;
     object-fit: cover;
 }
+
+.music-thumb {
+    display:block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 175px;
+    height: 175px;
+    object-fit: cover;
+}
