@@ -212,6 +212,10 @@
     <Compile Include="Migrations\202206221526512_AddMessageModel.Designer.cs">
       <DependentUpon>202206221526512_AddMessageModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202206231636133_AddImageToArtist.cs" />
+    <Compile Include="Migrations\202206231636133_AddImageToArtist.Designer.cs">
+      <DependentUpon>202206231636133_AddImageToArtist.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Album.cs" />
@@ -344,6 +348,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="img\music.png" />
     <Content Include="img\success.svg" />
     <Content Include="img\youtube.png" />
     <Content Include="Scripts\bootbox.js" />
@@ -504,6 +509,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202206221526512_AddMessageModel.resx">
       <DependentUpon>202206221526512_AddMessageModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202206231636133_AddImageToArtist.resx">
+      <DependentUpon>202206231636133_AddImageToArtist.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

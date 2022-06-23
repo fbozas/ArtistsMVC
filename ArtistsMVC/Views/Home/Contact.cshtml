@@ -19,7 +19,7 @@
         </ul>
     </div>
     <div class="col-md-6">
-        <h2>Φόρμα Επικοινωνίας</h2>
+        <h2 id="tade">Φόρμα Επικοινωνίας</h2>
 
         <div class="success-message text-center">
             <div id="suc-message" style="display:none">
@@ -95,6 +95,7 @@
 
                 }).done(function (response) {
                     setTimeout(function () {
+                        $("#tade").hide();
                         $("form").css('opacity', 0);
                         $("#suc-message").show();
                     }, 2000);

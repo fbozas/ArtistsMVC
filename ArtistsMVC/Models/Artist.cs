@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Web;
 
 namespace ArtistsMVC.Models
 {
@@ -16,6 +17,11 @@ namespace ArtistsMVC.Models
         [Required(ErrorMessage = "LastName is required")]
         [StringLength(60, MinimumLength = 2)]
         public string LastName { get; set; }
+
+        public string Thumbnail { get; set; }
+
+        [NotMapped]
+        public HttpPostedFileBase ImageFile { get; set; }
 
         [NotMapped]
         [Display(Name = "Artist")]
