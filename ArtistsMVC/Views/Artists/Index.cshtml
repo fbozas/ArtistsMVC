@@ -9,6 +9,67 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+@*-----------------------------------------------Simple----------------------------------*@
+@*<table class="table" id="artists">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FullName)
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(item.FullName, "Edit", "Artists", new { id = item.ID}, null)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.ID}) |
+                    <button class="btn-link js-delete" data-artist-id="@item.ID">Delete</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+
+@section scripts{
+
+    <script>
+        $(document).ready(function () {
+            $("#artists").DataTable();
+
+            $("#artists").on("click", ".js-delete", function () {
+                var button = $(this);
+                console.log(button);
+
+                bootbox.confirm("Are you sure to delete this artist?", function (result) {
+
+                    if (result) {
+                        $.ajax({
+                            url: "/api/artists/" + button.attr("data-artist-id"),
+                            method: "DELETE"
+                        }).done(function (response) {
+                            console.log(response);
+                            button.parents("tr").fadeOut();
+                        }).fail(function (error) {
+                            console.log(error);
+                        });
+                    }
+
+                });
+            });
+        });
+    </script>
+}*@
+
+@*--------------------------------------------------------------Ajax--------------------------------*@
+
 <table class="table" id="artists">
     <thead>
         <tr>
@@ -19,20 +80,19 @@
         </tr>
     </thead>
 
-@foreach (var item in Model) {
-    <tbody>        
-        
-    </tbody>
-}
+    @foreach (var item in Model)
+    {
+        <tbody>
+        </tbody>
+    }
 
 </table>
 
 
 @section scripts{
-    
+
     <script>
         $(document).ready(function () {
-            //$("#artists").DataTable();
 
             var table = $("#artists").DataTable({
                 ajax: {
@@ -49,19 +109,18 @@
                     {
                         data: "id",
                         render: function (data, type, artist) {
-                            console.log(data);
                             return "<a href='/artists/details/" + artist.id + "'> Details </a> | <button class= 'btn-link js-delete' data-artist-id=" + artist.id + ">Delete</button>";
                         }
                     }
                 ]
             })
 
-            $(".js-delete").click(function () {
+            $("#artists").on("click", ".js-delete", function () {
                 var button = $(this);
                 console.log(button);
 
                 bootbox.confirm("Are you sure to delete this artist?", function (result) {
-                   
+
                     if (result) {
                         $.ajax({
                             url: "/api/artists/" + button.attr("data-artist-id"),
@@ -73,10 +132,10 @@
                             console.log(error);
                         });
                     }
-                    
+
                 });
             });
         });
     </script>
-    
+
 }
