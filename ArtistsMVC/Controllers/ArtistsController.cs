@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -46,10 +47,20 @@ namespace ArtistsMVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,FirstName,LastName")] Artist artist)
+        public ActionResult Create(Artist artist)
         {
             if (ModelState.IsValid)
             {
+                if(artist.ImageFile == null)
+                {
+                    artist.Thumbnail = "na_image.jpg";
+                }
+                else
+                {
+                    artist.Thumbnail = Path.GetFileName(artist.ImageFile.FileName);
+                    string fullPath = Path.Combine(Server.MapPath("~/img"), artist.Thumbnail);
+                    artist.ImageFile.SaveAs(fullPath);
+                }
                 db.Artists.Add(artist);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -78,10 +89,21 @@ namespace ArtistsMVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,FirstName,LastName")] Artist artist)
+        public ActionResult Edit(Artist artist)
         {
             if (ModelState.IsValid)
             {
+                if (artist.ImageFile == null)
+                {
+                    artist.Thumbnail = "na_image.jpg";
+                }
+                else
+                {
+                    artist.Thumbnail = Path.GetFileName(artist.ImageFile.FileName);
+                    string fullPath = Path.Combine(Server.MapPath("~/img"), artist.Thumbnail);
+                    artist.ImageFile.SaveAs(fullPath);
+                }
+
                 db.Entry(artist).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
