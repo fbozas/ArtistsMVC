@@ -42,5 +42,14 @@ namespace ArtistsMVC.Controllers
 
             return View();
         }
+
+        public ActionResult NavBar()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                return PartialView("_LoggedInNavbar");
+            }
+            return PartialView("_Navbar");
+        }
     }
 }
