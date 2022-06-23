@@ -23,7 +23,7 @@ namespace ArtistsMVC.Controllers.Api
         
         public IHttpActionResult GetAlbums()
         {
-            return Ok(_albumRepository.GetAll()
+            return Ok(_albumRepository.GetAllWithArtist()
                 .Select(Mapper.Map<Album, AlbumDto>));
         }
 

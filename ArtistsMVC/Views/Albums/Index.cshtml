@@ -9,38 +9,164 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Artist.FullName)
-            @*Artist*@
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Artist.FullName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+@*-----------------------------Simple-----------------------------------*@
+@*<table class="table" id="albums">
+        <thead>
+
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Artist.FullName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Artist.FullName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+
+    </table>
+
+    @section scripts{
+
+        <script>
+            $(document).ready(function () {
+                $("#albums").DataTable();
+
+                $("#albums").on("click", ".js-delete", function () {
+                    var button = $(this);
+                    //console.log(button);
+
+                    bootbox.confirm("Are you sure to delete this album?", function (result) {
+
+                        if (result) {
+                            $.ajax({
+                                url: "/api/albums/" + button.attr("data-album-id"),
+                                method: "DELETE"
+                            }).done(function (response) {
+                                console.log(response);
+                                button.parents("tr").fadeOut();
+                            }).fail(function (error) {
+                                console.log(error);
+                            });
+                        }
+
+                    });
+
+
+                });
+            });
+        </script>
+
+    }*@
+
+
+@*------------------------------------------------Ajax---------------------------------*@
+
+<h2>Albums</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table" id="albums">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>Artist</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+    </tbody>
 
 </table>
+
+
+@section scripts{
+
+    <script>
+        $(document).ready(function () {
+
+            var table = $("#albums").DataTable({
+                ajax: {
+                    url: "/api/albums",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "title",
+                        render: function (data, type, album) {
+                            return "<a href = '/albums/edit/" + album.id + "'>" + album.title + "</a>";
+                        }
+                    },
+                    {
+                        data: "artistId",
+                        render: function (data, type, album) {;
+                            return "<a href='/artists/details/" + album.artistId + "' target=_blank>" + album.artist.fullName + "</a> ";
+                        }
+                    },
+                    {
+                        data: "id",
+                        render: function (data, type, album) {
+                            return "<a href='/albums/details/" + album.id + "'> Details </a> | <button class= 'btn-link js-delete' data-album-id=" + album.id + ">Delete</button>";
+
+                        }
+                    }
+                ]
+            })
+
+            $("#albums").on("click", ".js-delete", function () {
+                var button = $(this);
+
+                bootbox.confirm("Are you sure to delete this album?", function (result) {
+
+                    if (result) {
+                        $.ajax({
+                            url: "/api/albums/" + button.attr("data-album-id"),
+                            method: "DELETE"
+                        }).done(function (response) {
+                            console.log(response);
+                            button.parents("tr").fadeOut();
+                        }).fail(function (error) {
+                            console.log(error);
+                        });
+                    }
+
+                });
+
+
+            });
+        });
+    </script>
+
+}

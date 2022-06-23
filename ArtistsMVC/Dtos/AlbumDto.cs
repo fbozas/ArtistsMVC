@@ -18,5 +18,7 @@ namespace ArtistsMVC.Dtos
         public string Description { get; set; }
 
         public int ArtistId { get; set; }
+
+        public ArtistDto Artist { get; set; }
     }
 }
