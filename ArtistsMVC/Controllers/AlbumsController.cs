@@ -1,6 +1,7 @@
 ﻿using ArtistsMVC.Models;
 using ArtistsMVC.Repositories;
 using System;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -59,10 +60,21 @@ namespace ArtistsMVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Title,Description,ArtistId")] Album album)
+        public ActionResult Create(Album album)
         {
             if (ModelState.IsValid)
             {
+                if(album.ImageFile == null)
+                {
+                    album.Thumbnail = "na_image.jpg";
+                }
+                else
+                {
+                    album.Thumbnail = Path.GetFileName(album.ImageFile.FileName);
+                    string fullPath = Path.Combine(Server.MapPath("~/img/"), album.Thumbnail);
+                    album.ImageFile.SaveAs(fullPath);
+                }
+
                 _albumRepository.Create(album);
                 return RedirectToAction("Index");
             }
@@ -92,10 +104,18 @@ namespace ArtistsMVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Title,Description,ArtistId")] Album album)
+        public ActionResult Edit(Album album)
         {
             if (ModelState.IsValid)
             {
+                if(album.ImageFile != null)
+                {
+                    album.Thumbnail = Path.GetFileName(album.ImageFile.FileName);
+                    string fullPath = Path.Combine(Server.MapPath("~/img/"), album.Thumbnail);
+                    album.ImageFile.SaveAs(fullPath);
+                }
+                
+
                 _albumRepository.Update(album);
                 return RedirectToAction("Index");
             }

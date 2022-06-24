@@ -23,3 +23,17 @@
         </div>
     }
 </div>
+
+<div class="row">
+    <h2 class="text-center">Albums</h2>
+    <hr />
+    @foreach (var album in Model.Albums)
+    {
+        <div class="col-md-3">
+            <img src="~/img/@Url.Content(album.Thumbnail)" class="music-thumb" />
+            <div class="title">
+                <h4 class="text-center">@album.Title</h4>
+            </div>
+        </div>
+    }
+</div>

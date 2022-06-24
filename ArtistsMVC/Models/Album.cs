@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Web;
 
 namespace ArtistsMVC.Models
 {
@@ -13,6 +15,11 @@ namespace ArtistsMVC.Models
 
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
+
+        public string Thumbnail { get; set; }
+
+        [NotMapped]
+        public HttpPostedFileBase ImageFile { get; set; }
 
         public ICollection<Song> Songs { get; set; }
 
