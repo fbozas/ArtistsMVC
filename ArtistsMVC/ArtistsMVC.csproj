@@ -502,6 +502,7 @@
     <Content Include="Views\AlbumsAsync\Details.cshtml" />
     <Content Include="Views\AlbumsAsync\Edit.cshtml" />
     <Content Include="Views\AlbumsAsync\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutPageIdentity.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

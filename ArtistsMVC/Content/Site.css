@@ -42,3 +42,14 @@ img#image-hero {
     height: 175px;
     object-fit: cover;
 }
+
+#IdentityForm {
+    margin: 0 auto;
+    width: 50%;
+    padding: 50px;
+    background-color: #ebebeb;
+}
+
+#IdentityForm input {
+    max-width: unset;
+}
