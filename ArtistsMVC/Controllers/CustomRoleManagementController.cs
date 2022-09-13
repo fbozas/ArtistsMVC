@@ -25,6 +25,18 @@ namespace ArtistsMVC.Controllers
             return View(_roleManager.Roles.ToList());
         }
 
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Create(IdentityRole role)
+        {
+            _roleManager.Create(role);
+            return RedirectToAction("Index", "CustomRoleManagement");
+        }
+
         protected override void Dispose(bool disposing)
         {
             _context.Dispose();

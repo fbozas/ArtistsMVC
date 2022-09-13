@@ -505,6 +505,7 @@
     <Content Include="Views\AlbumsAsync\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutPageIdentity.cshtml" />
     <Content Include="Views\CustomRoleManagement\Index.cshtml" />
+    <Content Include="Views\CustomRoleManagement\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
