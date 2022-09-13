@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace ArtistsMVC.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         private readonly AlbumRepository _albumRepository;
