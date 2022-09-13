@@ -37,6 +37,12 @@ namespace ArtistsMVC.Controllers
             return RedirectToAction("Index", "CustomRoleManagement");
         }
 
+        public ActionResult IdentityUsers()
+        {
+            var users = _context.Users.ToList();
+            return View(users);
+        }
+
         protected override void Dispose(bool disposing)
         {
             _context.Dispose();

@@ -506,6 +506,7 @@
     <Content Include="Views\Shared\_LayoutPageIdentity.cshtml" />
     <Content Include="Views\CustomRoleManagement\Index.cshtml" />
     <Content Include="Views\CustomRoleManagement\Create.cshtml" />
+    <Content Include="Views\CustomRoleManagement\IdentityUsers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
