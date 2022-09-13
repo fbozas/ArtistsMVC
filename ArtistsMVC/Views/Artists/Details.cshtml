@@ -27,6 +27,15 @@
         </dd>
 
     </dl>
+
+    @foreach(var album in Model.Albums)
+    {
+        <br/> <strong>Album:</strong> @album.Title <br/>
+        foreach(var song in album.Songs)
+        {
+            <p style="margin-left:10px"> @song.Title</p>
+        }
+    }
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
