@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace ArtistsMVC.Controllers
 {
+    [Authorize]
     public class SongsController : Controller
     {
         private readonly ApplicationDbContext _context;
