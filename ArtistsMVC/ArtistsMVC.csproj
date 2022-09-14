@@ -507,6 +507,7 @@
     <Content Include="Views\CustomRoleManagement\Index.cshtml" />
     <Content Include="Views\CustomRoleManagement\Create.cshtml" />
     <Content Include="Views\CustomRoleManagement\IdentityUsers.cshtml" />
+    <Content Include="Views\Songs\SongsIndexWithoutEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

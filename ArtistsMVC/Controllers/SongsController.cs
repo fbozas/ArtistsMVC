@@ -22,7 +22,12 @@ namespace ArtistsMVC.Controllers
                 .Include(s => s.Album.Artist)
                 .ToList();
 
-            return View(songs);
+            if(User.IsInRole("Administrator") || User.IsInRole("Editor"))
+            {
+                return View(songs);
+            }
+
+            return View("SongsIndexWithoutEdit", songs);
         }
 
         public ActionResult Details(int? id)
@@ -93,6 +98,7 @@ namespace ArtistsMVC.Controllers
             return RedirectToAction("Index", "Songs");
         }
 
+        [Authorize(Roles = "Administrator,Editor")]
         public ActionResult Edit(int? id)
         {
             if(id == null)
