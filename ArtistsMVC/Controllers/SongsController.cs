@@ -98,7 +98,7 @@ namespace ArtistsMVC.Controllers
             return RedirectToAction("Index", "Songs");
         }
 
-        [Authorize(Roles = "Administrator,Editor")]
+        [Authorize(Roles = RoleName.Administrator + "," + RoleName.Editor)]
         public ActionResult Edit(int? id)
         {
             if(id == null)

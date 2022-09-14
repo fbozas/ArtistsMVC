@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace ArtistsMVC.Controllers
 {
-    [Authorize(Roles = "Administrator")]
+    [Authorize(Roles = RoleName.Administrator)]
     public class CustomRoleManagementController : Controller
     {
         private ApplicationDbContext _context;
